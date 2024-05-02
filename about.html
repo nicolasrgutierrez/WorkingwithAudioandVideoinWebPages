@@ -8,6 +8,9 @@
   <meta name="description" content="Store front for Bethany's Pie Shop">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/7.0.5/mediaelementplayer.min.css"
+    integrity="sha512-7D82/+kVzJhvYhr5k2+TueNVDAoZA4MAklU9vjupYEAnLx97qV3UFZQZgwaD6dPSAEEIiQXBDkK0Wh5BMTUFBA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     body {
       margin-top: 0px;
@@ -79,6 +82,8 @@
       width: 100%;
     }
   </style>
+  <script src="http://api.html5media.info/1.1.8/html5media.min.js"></script>
+
 </head>
 
 <body>
@@ -116,15 +121,25 @@
 
         <p>In the video below, you can see how we decorate our mini-cupcakes.</p>
 
-        <video controls>
+        <video id="video" controls width="560" height="315">
           <source src="media/baking.mp4" type="video/mp4" />
           <source src="media/baking.webm" type="video/webm" />
           <track label="English" kind="subtitles" src="media/baking.vtt" srclang="en" default />
-          <track label="Spanish" kind="subtitles" src="media/baking-es.vtt" srclang="es"/>
+          <track label="Spanish" kind="subtitles" src="media/baking-es.vtt" srclang="es" />
           Your browser doesn't support video.
         </video>
 
-        <audio controls>
+        <div>
+          <button id="playButton">Play</button>
+          <button id="pauseButton">Pause</button>
+          <button id="stopButton">Stop</button>
+        </div>
+
+        <div>
+          Current Position: <span id="timeDisplay"></span> sec.
+        </div>
+
+        <audio controls id="audio">
           <source src="media/breadsandcake.wav" type="audio/wav" />
           <source src="media/breadsandcake.mp3" type="audio/mp3" />
           <source src="media/breadsandcake.ogg" type="audio/ogg" />
@@ -135,7 +150,8 @@
     </main>
 
     <footer>
-      <p>Our address is <address>Bethany's Pie Shop - Bakery Street 555 Brussels Belgium</address>
+      <p>Our address is
+      <address>Bethany's Pie Shop - Bakery Street 555 Brussels Belgium</address>
       </p>
       <p><small>&copy; 2020 Bethany's Pie Shop - All rights reserved</small></p>
       <p>Contact us via <a href="mailto:info@bethanyspieshop.com">email</a></p>
@@ -143,4 +159,43 @@
     </footer>
   </div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/7.0.5/mediaelement-and-player.min.js"
+  integrity="sha512-ZjSJNNah4veKupXd2MgQ5QFEjF9sKShuRAzH/isJ5AzFMBHGNxSGz/FBkYbmbm/fYohH5hqHb9O74eSspybb5g=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+
+    new MediaElementPlayer("video");
+    new MediaElementPlayer("audio");
+
+    let playButton = document.getElementById("playButton");
+    let pauseButton = document.getElementById("pauseButton");
+    let stopButton = document.getElementById("stopButton");
+    let video = document.getElementById("video");
+    let timeDisplay = document.getElementById("timeDisplay");
+
+    video.addEventListener("ended", function () {
+      video.currentTime = 0;
+    });
+
+    video.addEventListener("timeupdate", function () {
+      timeDisplay.innerText = Math.floor(video.currentTime);
+    })
+
+    playButton.addEventListener("click", function () {
+      video.play();
+    });
+
+    pauseButton.addEventListener("click", function () {
+      video.pause();
+    });
+
+    stopButton.addEventListener("click", function () {
+      video.pause();
+      video.currentTime = 0;
+    });
+
+  });
+</script>
+
 </html>
