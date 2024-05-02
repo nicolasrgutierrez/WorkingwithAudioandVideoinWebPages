@@ -116,11 +116,18 @@
 
         <p>In the video below, you can see how we decorate our mini-cupcakes.</p>
 
-        <video src="media/baking.mp4" controls>
+        <video controls>
+          <source src="media/baking.mp4" type="video/mp4" />
+          <source src="media/baking.webm" type="video/webm" />
+          <track label="English" kind="subtitles" src="media/baking.vtt" srclang="en" default />
+          <track label="Spanish" kind="subtitles" src="media/baking-es.vtt" srclang="es"/>
           Your browser doesn't support video.
         </video>
 
-        <audio src="media/breadsandcake.mp3" controls>
+        <audio controls>
+          <source src="media/breadsandcake.wav" type="audio/wav" />
+          <source src="media/breadsandcake.mp3" type="audio/mp3" />
+          <source src="media/breadsandcake.ogg" type="audio/ogg" />
           Your browser doesn't support audio.
         </audio>
 
